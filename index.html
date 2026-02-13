@@ -140,7 +140,7 @@ button:hover{transform:scale(1.05);background:#ff1f5a}
 
     <div class="heart-container">
       <h2 style="margin-top:40px;">Tap the Heart ❤️</h2>
-      <div class="heart" onclick="explodeHeart()"></div>
+      <div id="heart" class="heart" onclick="explodeHeart()"></div>
       <div id="valentineMessage" class="final-message hidden">
         🎆 Happy Valentine My Love ❤️
       </div>
@@ -164,18 +164,37 @@ function checkPassword(){
 }
 
 function explodeHeart(){
+  const heart = document.getElementById('heart');
+  const message = document.getElementById('valentineMessage');
+
+  // Hide heart after tap
+  heart.style.display = 'none';
+
   const colors=['#ff0','#ff3','#f0f','#0ff','#fff','#ff5722'];
-  for(let i=0;i<60;i++){
+  for(let i=0;i<80;i++){
     const fw=document.createElement('div');
     fw.className='firework';
     fw.style.background=colors[Math.floor(Math.random()*colors.length)];
     fw.style.left='50%';
     fw.style.top='60%';
-    fw.style.setProperty('--x',(Math.random()*400-200)+'px');
-    fw.style.setProperty('--y',(Math.random()*400-200)+'px');
+    fw.style.setProperty('--x',(Math.random()*500-250)+'px');
+    fw.style.setProperty('--y',(Math.random()*500-250)+'px');
     document.body.appendChild(fw);
     setTimeout(()=>fw.remove(),1000);
   }
+
+  // Pop-up effect after slight delay
+  setTimeout(()=>{
+    message.classList.remove('hidden');
+    message.style.transform = 'scale(0.5)';
+    message.style.opacity = '0';
+    message.style.transition = 'all 0.6s ease';
+    setTimeout(()=>{
+      message.style.transform = 'scale(1)';
+      message.style.opacity = '1';
+    },50);
+  },400);
+}
   document.getElementById('valentineMessage').classList.remove('hidden');
 }
 </script>
