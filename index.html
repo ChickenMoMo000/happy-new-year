@@ -57,9 +57,16 @@ button:hover{transform:scale(1.05);background:#ff1f5a}
 /* Heart */
 .heart-container{
   display:flex;
-  flex-direction:column;
-  align-items:center;
+  flex-direction: column;
+  align-items: center;
   margin-top:50px;
+  gap: 30px; /* space between text and heart */
+}
+.tap-text {
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin: 0;
+  z-index: 1;
 }
 .heart{
   width:40px;
@@ -79,8 +86,8 @@ button:hover{transform:scale(1.05);background:#ff1f5a}
   border-radius:50%;
   position:absolute;
 }
-.heart:before{top:-75px;left:0}
-.heart:after{left:75px;top:0}
+.heart:before{top:-50px;left:0} /* reduced overlap */
+.heart:after{left:50px;top:0}  /* reduced overlap */
 
 @keyframes pulse{
   0%{transform:rotate(-45deg) scale(1)}
@@ -139,21 +146,13 @@ button:hover{transform:scale(1.05);background:#ff1f5a}
       you mean more to me than words could ever fully express.
     </p>
 
-    <div class="heart-container" style="margin-top:120px; display:flex; flex-direction:column; align-items:center;">
-      <h2 style="margin-bottom:25px; font-size:28px; letter-spacing:1px;">
-        👇 Tap The Heart 👇
-      </h2>
-
+    <div class="heart-container">
+      <h2 class="tap-text">👇 Tap The Heart 👇</h2>
       <div id="heart" class="heart" onclick="explodeHeart()"></div>
-
       <div id="valentineMessage" class="final-message hidden">
         🎆 Happy Valentine My Love ❤️
       </div>
     </div>
-
-  </div>
-
-  </div>
 
   </div>
 </div>
@@ -171,8 +170,6 @@ window.addEventListener('DOMContentLoaded', () => {
 function checkPassword(){
   const input = document.getElementById('password');
   const val = input.value.trim();
-
-  console.log("Entered:", val); // Debug log
 
   if(val.toLowerCase() === SECRET.toLowerCase()){
     document.getElementById('login').classList.add('hidden');
